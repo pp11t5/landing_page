@@ -1,11 +1,11 @@
 {
-    "name": "landing_page",
-    "short_name": "landing_page",
+    "name": "먹어도 돼?",
+    "short_name": "먹어도 돼?",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FEFEFE",
+    "theme_color": "#00BF72",
+    "description": "기저질환 기준으로 음식을 판별하는 앱",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
@@ -18,18 +18,6 @@
             "src": "icons/Icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
-        },
-        {
-            "src": "icons/Icon-maskable-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "icons/Icon-maskable-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
         }
     ]
 }
