@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#FEFEFE",
     "theme_color": "#00BF72",
-    "description": "기저질환 기준으로 음식을 판별하는 앱",
+    "description": "오늘 먹을 음식, 내 몸에 먼저 물어보세요.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

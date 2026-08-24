@@ -19,7 +19,7 @@ class FlowSection extends StatelessWidget {
       child: Column(
         children: [
           SectionContainer(
-            padding: AppLayout.sectionPadding(bp).copyWith(top: 92, bottom: 24),
+            padding: AppLayout.sectionPadding(bp).copyWith(top: 140, bottom: 24),
             child: Text(
               '먹어도 돼?는 이렇게 사용해요.',
               textAlign: TextAlign.center,
@@ -33,11 +33,27 @@ class FlowSection extends StatelessWidget {
                   : constraints.maxWidth < 1000
                   ? 2
                   : 5;
-              final cardH = columns == 1 ? 120.0 : 199.0;
+              final pad = AppLayout.pagePadding(
+                LandingScope.of(context).breakpoint,
+              );
+
+              if (columns == 1) {
+                return Padding(
+                  padding: pad,
+                  child: Column(
+                    children: [
+                      for (var i = 0; i < flowSteps.length; i++) ...[
+                        if (i > 0) const SizedBox(height: 21),
+                        _FlowCard(step: flowSteps[i]),
+                      ],
+                    ],
+                  ),
+                );
+              }
+
+              const cardH = 199.0;
               final cards = Padding(
-                padding: AppLayout.pagePadding(
-                  LandingScope.of(context).breakpoint,
-                ),
+                padding: pad,
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -49,31 +65,7 @@ class FlowSection extends StatelessWidget {
                     mainAxisExtent: cardH,
                   ),
                   itemBuilder: (context, index) {
-                    final step = flowSteps[index];
-                    return Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFFCFCFC),
-                        borderRadius: BorderRadius.circular(17.5),
-                        border: Border.all(color: AppColors.gray40, width: 1),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            step.number,
-                            style: AppTypography.caption.copyWith(
-                              color: AppColors.green100,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(step.title, style: AppTypography.bodyStrong),
-                          const SizedBox(height: 8),
-                          Text(step.body, style: AppTypography.caption),
-                        ],
-                      ),
-                    );
+                    return _FlowCard(step: flowSteps[index]);
                   },
                 ),
               );
@@ -103,7 +95,43 @@ class FlowSection extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 92),
+          const SizedBox(height: 140),
+        ],
+      ),
+    );
+  }
+}
+
+class _FlowCard extends StatelessWidget {
+  const _FlowCard({required this.step});
+
+  final FlowStep step;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFCFCFC),
+        borderRadius: BorderRadius.circular(17.5),
+        border: Border.all(color: AppColors.gray40, width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            step.number,
+            style: AppTypography.caption.copyWith(
+              color: AppColors.green100,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(step.title, style: AppTypography.bodyStrong),
+          const SizedBox(height: 8),
+          Text(step.body, style: AppTypography.caption),
         ],
       ),
     );
